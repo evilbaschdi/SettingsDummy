@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿using System;
 using Microsoft.Extensions.Configuration;
 
 namespace SettingsDummy
@@ -9,10 +9,15 @@ namespace SettingsDummy
     {
         static KeyValue()
         {
-            AppSetting = new ConfigurationBuilder()
-                         .SetBasePath(Directory.GetCurrentDirectory())
-                         .AddJsonFile("KeyValue.json")
-                         .Build();
+            AppSetting = new ConfigurationBuilder().Add(
+                (Action<WritableJsonConfigurationSource>) (s =>
+                                                           {
+                                                               s.FileProvider = null;
+                                                               s.Path = "KeyValue.json";
+                                                               s.Optional = false;
+                                                               s.ReloadOnChange = true;
+                                                               s.ResolveFileProvider();
+                                                           })).Build();
         }
 
 

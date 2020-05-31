@@ -16,6 +16,10 @@ namespace SettingsDummy
             Console.WriteLine("---");
             Console.WriteLine();
 
+            KeyValue.AppSetting["Black"] = "Coffee";
+            Console.WriteLine(keyValueConfiguration["Black"]);
+            Console.WriteLine();
+
             var keyValueListAlterBridge = KeyValueList.AppSetting.GetSection("AlterBridge").Get<List<string>>();
             var keyValueListCreed = KeyValueList.AppSetting.GetSection("Creed").Get<List<string>>();
 
